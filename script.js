@@ -3,10 +3,10 @@ document.querySelector('title').textContent = "Space Fighters"
 /* 
 1. (Complete) Generate 6 alien ships and store in array 
 2. (Complete) Show stats for human ship and 1 alien ship on screen
-3. Simulate fight
-    a. Display report of battle
+3. (Complete) Simulate fight
+    a. (Complete) Display report of battle
     b. Create lose state if player is defeated
-4. Allow player to continue fight once current alien ship is destroyed
+4. (complete) Allow player to continue fight once current alien ship is destroyed
     a. Create prompt with options
     b. Create retreat state if player retreats
 5. Create new round and move in new alien ship
@@ -168,6 +168,14 @@ function alienDestroyed() {
         newRound()
     }
 }
+function win() {
+
+}
+function lose() {
+
+}
+
+// Start new round
 function newRound() {
 let report = document.createElement('h2')
 report.textContent = "Round " + (++round)
@@ -179,7 +187,6 @@ humanHull.textContent = "Hull: " + USShip.hull
 humanFire.textContent = "Firepower: " + USShip.firepower
 // accuracy
 humanAcc.textContent = "Accuracy: " + USShip.accuracy
-
 // Show alien ship stats
 // hull
 alienHull.textContent = "Hull: " + carrier.ships[unit].hull
@@ -188,3 +195,5 @@ alienFire.textContent = "Firepower: " + carrier.ships[unit].firepower
 // accuracy
 alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
 }
+
+// Allow retreat
