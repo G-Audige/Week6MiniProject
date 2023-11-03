@@ -1,0 +1,37 @@
+/* tags */
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+div {
+    border: solid white;
+}
+
+/* classes */
+.fighters {
+    width: 50%
+}
+.ships {
+    width: 50%
+}
+
+/* ids */
+#title {
+    border: solid white;
+}
+#screen {
+    display: flex;
+    height: 200px;
+    margin-top: 10px;
+}
+#controls {
+    margin-top: 10px;
+}
+#info {
+    display: flex;
+    margin-top: 10px;
+}
+#full-bl {
+    margin-top: 10px;
+}
