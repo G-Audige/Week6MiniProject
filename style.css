@@ -73,5 +73,6 @@ h2 {
 }
 #bl-head {
     border-bottom: dotted white;
-    padding-bottom: 5px;
+    margin: auto;
+    padding: 5px;
 }

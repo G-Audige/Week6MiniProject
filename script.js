@@ -137,7 +137,8 @@ alienStats.appendChild(alienAcc)
 //Show round number
 document.querySelector('#round').textContent = `Round ${round}`
 document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
-switchAlien(shipModels)
+// Show alien model
+switchAlienModel(shipModels)
 
 
 // Simulate fight
@@ -209,7 +210,7 @@ function alienDestroyed() {
     battleLog.appendChild(report)
     ++unit
     if(unit < shipNum) {       
-        newRound()
+        startNewRound()
     }
     else {
         win()
@@ -229,13 +230,10 @@ function lose() {
 }
 
 // Start new round
-function newRound() {
-let report = document.createElement('h3')
-report.textContent = "Round " + (++round)
-battleLog.appendChild(report)
+function startNewRound() {
+prompt()
 document.querySelector('#round').textContent = "..."
 document.querySelector('#ship-number').textContent = "..."
-report.style.textAlign = "Left"
 // Show new alien ship stats
 // hull
 alienHull.textContent = "Hull: " + carrier.ships[unit].hull
@@ -243,10 +241,9 @@ alienHull.textContent = "Hull: " + carrier.ships[unit].hull
 alienFire.textContent = "Firepower: " + carrier.ships[unit].firepower
 // accuracy
 alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
-prompt()
 }
 
-// Present retreat option
+// Present retreat/stay option
 function prompt() {
     statement.textContent = "You defeated the alien ship. The next ship is coming. Would you like to retreat?"
     attackBtn.style.display = 'none'
@@ -264,12 +261,16 @@ function retreat() {
     retry.style.display = 'inline' 
 }
 function stay() {
+    let reportRound = document.createElement('h3')
+    reportRound.textContent = "Round " + (++round)
+    battleLog.appendChild(reportRound)
+    reportRound.style.textAlign = "Left"
     statement.textContent = "Ready to fire..."
     humanLog.textContent = "..."
     attackBtn.style.display = 'inline'
     document.querySelector('#round').textContent = `Round ${round}`
     document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
-    switchAlien(shipModels)
+    switchAlienModel(shipModels)
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( x => {
         x.style.display = "none"
@@ -277,7 +278,7 @@ function stay() {
 }
 
 // Handle images
-function switchAlien(ships) {
+function switchAlienModel(ships) {
     alienImg.setAttribute('src', ships[Math.floor(Math.random() * ships.length)])
 }
 function removeShip(ship) {
