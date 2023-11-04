@@ -140,7 +140,7 @@ document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
 switchAlien(shipModels)
 
 
-// Simpulate fight
+// Simulate fight
 // Human attack
 function attack() {
     const report = document.createElement('h3')
@@ -278,9 +278,7 @@ function stay() {
 
 // Handle images
 function switchAlien(ships) {
-    let test = ships[Math.floor(Math.random() * ships.length)]
-    alienImg.setAttribute('src', test)
-    console.log(test)
+    alienImg.setAttribute('src', ships[Math.floor(Math.random() * ships.length)])
 }
 function removeShip(ship) {
     ship.setAttribute('src', "")

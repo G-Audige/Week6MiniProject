@@ -23,6 +23,7 @@ h2 {
 }
 .fighter-titles {
     margin: auto;
+    padding: 5px;
 }
 .ships {
     border: solid black;
