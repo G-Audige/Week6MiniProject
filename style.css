@@ -40,7 +40,7 @@ h2 {
     border: outset white;
 }
 #round {
-    border-bottom: solid black;
+    border-style: outset white;
     margin-top: 10px;
 }
 #screen {
