@@ -18,9 +18,11 @@
     <div id="screen">
         <div class="fighters" id = "fighter-1">
             <h2>USS Assembly</h2>
+            <img id = "human-fighter" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/4b5683133022173.61b4a4cb0a205.gif">
         </div>
         <div class="fighters" id = "fighter-2">
             <h2 id = "ship-number">Alien Ship</h2>
+            <img id = "alien-fighter">
         </div>
     </div>
 
@@ -48,12 +50,17 @@
                         Retreat
                     </button>
                 </div>
-            <div class = "extra-btn">
-                <button id="stay" onclick = stay()>
-                    Stay
-                </button>
+                <div id = "retry">
+                    <button id="retry-btn" value = "Retry?" onclick = location.reload()>
+                        Retry?
+                    </button>
+                </div>
+                <div class = "extra-btn">
+                    <button id="stay" onclick = stay()>
+                        Stay
+                    </button>
+                </div>
             </div>
-        </div>
 
         </div>
         <div id = "alien-stats" class="ships">
@@ -62,7 +69,7 @@
     </div>
 
     <div id="full-bl">
-        <h2>Battlelog</h2>
+        <h2 id = "bl-head">Battlelog</h2>
     </div>
 </body>
 </html>

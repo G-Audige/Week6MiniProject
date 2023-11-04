@@ -18,6 +18,7 @@ document.querySelector('title').textContent = "Space Fighters"
 let unit = 0
 let turn = 0
 let round = 0
+let shipNum = 6
 let humanstats = document.querySelector('#human-stats')
 let alienStats = document.querySelector('#alien-stats')
 let battleLog = document.querySelector('#full-bl')
@@ -25,6 +26,35 @@ let statement = document.querySelector('#focus')
 let humanLog = document.querySelector('#human-action')
 let alienLog = document.querySelector('#alien-action')
 let attackBtn = document.querySelector('#attack')
+let retry = document.querySelector('#retry')
+let retryBtn = document.querySelector('#retry-btn')
+let alienImg = document.querySelector('#alien-fighter')
+let humanImg = document.querySelector('#human-fighter')
+let shipModels = [
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/63fb3e133022173.61b4a4cb09cbb.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e3ea3a133022173.61b4a4cb93519.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e9d90c133022173.61b4a4ca1f453.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/2f91f6133022173.61b4a4cb0a9a8.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/634e1b133022173.61b4a4ccc4fa3.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/1fbb32133022173.61c5d391c255b.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/4ac32b133022173.61b4a4cb09707.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/c2262c133022173.61b4a4cb93017.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/ea3819133022173.61c5d391c1c3d.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/d6afaa133022173.61b4a4cc6a723.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/8f8cc4133022173.61b4a4ca1ff61.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/7a83b4133022173.61b4a4cc69912.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/29ccc3133022173.61c5d391c123f.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/fbd672133022173.61b4a4ca1f87e.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/6296c8133022173.61b4a4cb0a631.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/f6ecf4133022173.61b4a4ccc59e4.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/da5f40133022173.61b4a4cc691fe.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/8025b3133022173.61b4a4cc6a195.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/244550133022173.61b4a4cc6ac58.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/609223133022173.61c5d391c2c97.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/26d10b133022173.61b4a4ccc550d.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/c23657133022173.61b4a4ccc49c9.gif",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/disp/633cea133022173.61b4a4ca1edc7.gif"
+]
 
 ///////////////////////
 // Generate alien ships
@@ -62,7 +92,7 @@ class Mothership {
 }
 
 const carrier = new Mothership()
-for(let i = 0; i < 6; i++) {
+for(let i = 0; i < shipNum; i++) {
     carrier.generateShip(carrier.generateHull(3, 6), carrier.generateFirepower(2, 4), carrier.generateAccuracy(6, 8))
 }
 
@@ -75,7 +105,7 @@ class USShip {
 }
 
 // Show USS Assembly Stats
-let report = document.createElement('h2')
+let report = document.createElement('h3')
 report.textContent = "Round " + (++round)
 battleLog.appendChild(report)
 report.style.textAlign = "Left"
@@ -107,10 +137,10 @@ alienStats.appendChild(alienAcc)
 //Show round number
 document.querySelector('#round').textContent = `Round ${round}`
 document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
+switchAlien(shipModels)
 
 
-/////////////////////
-// 3. Simpulate fight
+// Simpulate fight
 // Human attack
 function attack() {
     const report = document.createElement('h3')
@@ -172,13 +202,13 @@ function evade() {
     battleLog.appendChild(report)
 }
 function alienDestroyed() {
+    removeShip(alienImg)
     let report = document.createElement('p')
     report.textContent = "You defeated the alien ship."
     alienLog.textContent = "..."
     battleLog.appendChild(report)
     ++unit
-    if(unit < 6) {
-        
+    if(unit < shipNum) {       
         newRound()
     }
     else {
@@ -186,29 +216,27 @@ function alienDestroyed() {
     }
 }
 function win() {
-    statement.textContent = "You deafeated the last alien ship!"
+    statement.textContent = "You defeated the last alien ship!"
     attackBtn.style.display = 'none'
+    retryBtn.innerHTML = "Play again?"
+    retry.style.display = 'inline'
 }
 function lose() {
+    removeShip(humanImg)
     statement.textContent = "You have lost this battle."
     attackBtn.style.display = 'none'
+    retry.style.display = 'inline'
 }
 
 // Start new round
 function newRound() {
-let report = document.createElement('h2')
+let report = document.createElement('h3')
 report.textContent = "Round " + (++round)
 battleLog.appendChild(report)
 document.querySelector('#round').textContent = "..."
 document.querySelector('#ship-number').textContent = "..."
 report.style.textAlign = "Left"
-// hull
-humanHull.textContent = "Hull: " + USShip.hull
-// firepower
-humanFire.textContent = "Firepower: " + USShip.firepower
-// accuracy
-humanAcc.textContent = "Accuracy: " + USShip.accuracy
-// Show alien ship stats
+// Show new alien ship stats
 // hull
 alienHull.textContent = "Hull: " + carrier.ships[unit].hull
 // firepower
@@ -232,7 +260,8 @@ function retreat() {
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( x => {
         x.style.display = "none"
-    }) 
+    })
+    retry.style.display = 'inline' 
 }
 function stay() {
     statement.textContent = "Ready to fire..."
@@ -240,8 +269,19 @@ function stay() {
     attackBtn.style.display = 'inline'
     document.querySelector('#round').textContent = `Round ${round}`
     document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
+    switchAlien(shipModels)
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( x => {
         x.style.display = "none"
     })
+}
+
+// Handle images
+function switchAlien(ships) {
+    let test = ships[Math.floor(Math.random() * ships.length)]
+    alienImg.setAttribute('src', test)
+    console.log(test)
+}
+function removeShip(ship) {
+    ship.setAttribute('src', "")
 }

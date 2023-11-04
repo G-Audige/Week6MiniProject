@@ -8,12 +8,17 @@ body {
     width: 95%;
 }
 div {
-    border: solid white;
+    border: outset white;
+}
+img {
+    width: 100%;
+}
+h2 {
+    border-bottom: solid white;
 }
 
 /* classes */
 .fighters {
-    background-color: midnightblue;
     width: 50%
 }
 .ships {
@@ -28,7 +33,7 @@ div {
 
 /* ids */
 #title {
-    border: solid white;
+    border: outset white;
 }
 #round {
     border-bottom: solid black;
@@ -36,7 +41,6 @@ div {
 }
 #screen {
     display: flex;
-    height: 200px;
 }
 #controls {
     border-bottom: solid black;
@@ -50,6 +54,11 @@ div {
     display: flex;
     justify-content: space-between;
 }
+#retry {
+    border: solid black;
+    display: none;
+    margin: auto;
+}
 #info {
     display: flex;
     height: 190px;
@@ -58,4 +67,8 @@ div {
 #full-bl {
     margin-top: 10px;
     padding: 0px 10px 0px 10px
+}
+#bl-head {
+    border-bottom: dotted white;
+    padding-bottom: 5px;
 }
