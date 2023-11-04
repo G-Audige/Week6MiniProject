@@ -253,6 +253,7 @@ function prompt() {
     })  
 }
 function retreat() {
+    humanLog.textContent = "..."
     statement.textContent = "You have fled."
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( x => {
