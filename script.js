@@ -5,13 +5,13 @@ document.querySelector('title').textContent = "Space Fighters"
 2. (Complete) Show stats for human ship and 1 alien ship on screen
 3. (Complete) Simulate fight
     a. (Complete) Display report of battle
-    b. Create lose state if player is defeated
+    b. (Complete) Create lose state if player is defeated
 4. (complete) Allow player to continue fight once current alien ship is destroyed
-    a. Create prompt with options
-    b. Create retreat state if player retreats
-5. Create new round and move in new alien ship
-6. Continue until last alien ship is destroyed
-    a. Create win state if player wins
+    a. (Complete) Create prompt with options
+    b. (Complete) Create retreat state if player retreats
+5. (complete) Create new round and move in new alien ship
+6. (Complete) Continue until last alien ship is destroyed
+    a. (complete) Create win state if player wins
 */
 
 // Declarations
@@ -21,6 +21,10 @@ let round = 0
 let humanstats = document.querySelector('#human-stats')
 let alienStats = document.querySelector('#alien-stats')
 let battleLog = document.querySelector('#full-bl')
+let statement = document.querySelector('#focus')
+let humanLog = document.querySelector('#human-action')
+let alienLog = document.querySelector('#alien-action')
+let attackBtn = document.querySelector('#attack')
 
 /////////////////////////
 // 1 Generate alien ships
@@ -71,7 +75,6 @@ class USShip {
 }
 
 // Show USS Assembly Stats
-
 let report = document.createElement('h2')
 report.textContent = "Round " + (++round)
 battleLog.appendChild(report)
@@ -88,7 +91,6 @@ humanstats.appendChild(humanFire)
 const humanAcc = document.createElement('p')
 humanAcc.textContent = "Accuracy: " + USShip.accuracy
 humanstats.appendChild(humanAcc)
-
 // Show alien ship stats
 // hull
 const alienHull = document.createElement('p')
@@ -102,6 +104,9 @@ alienStats.appendChild(alienFire)
 const alienAcc = document.createElement('p')
 alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
 alienStats.appendChild(alienAcc)
+//Show round number
+document.querySelector('#round').textContent = `Round ${round}`
+document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
 
 
 /////////////////////
@@ -133,6 +138,9 @@ function counter() {
         USShip.hull -= carrier.ships[unit].firepower
         humanHull.textContent = "Hull: " + USShip.hull
         alienStrike(carrier.ships[unit].firepower)
+        if(USShip.hull <= 0) {
+            lose()
+        }
     }
     else {
         evade()
@@ -142,37 +150,48 @@ function counter() {
 function humanStrike(x) {
     let report = document.createElement('p')
     report.textContent = `You hit the alien ship for ${x} damage.`
+    humanLog.textContent = `You hit the alien ship for ${x} damage.`
     battleLog.appendChild(report)
 }
 function alienStrike(x) {
     let report = document.createElement('p')
     report.textContent = `The alien ship hit your ship for ${x} damage.`
+    alienLog.textContent = `The alien ship hit your ship for ${x} damage.`
     battleLog.appendChild(report)
 }
 function miss() {
     let report = document.createElement('p')
     report.textContent = "You missed."
+    humanLog.textContent = "You missed."
     battleLog.appendChild(report)
 }
 function evade() {
     let report = document.createElement('p')
     report.textContent = "You evaded the attack of the alien ship."
+    alienLog.textContent = "You evaded the attack of the alien ship."
     battleLog.appendChild(report)
 }
 function alienDestroyed() {
     let report = document.createElement('p')
     report.textContent = "You defeated the alien ship."
+    alienLog.textContent = "..."
     battleLog.appendChild(report)
+    ++unit
     if(unit < 6) {
-        ++unit
+        
         newRound()
+    }
+    else {
+        win()
     }
 }
 function win() {
-
+    statement.textContent = "You deafeated the last alien ship!"
+    attackBtn.style.display = 'none'
 }
 function lose() {
-
+    statement.textContent = "You have lost this battle."
+    attackBtn.style.display = 'none'
 }
 
 // Start new round
@@ -180,6 +199,8 @@ function newRound() {
 let report = document.createElement('h2')
 report.textContent = "Round " + (++round)
 battleLog.appendChild(report)
+document.querySelector('#round').textContent = "..."
+document.querySelector('#ship-number').textContent = "..."
 report.style.textAlign = "Left"
 // hull
 humanHull.textContent = "Hull: " + USShip.hull
@@ -194,6 +215,33 @@ alienHull.textContent = "Hull: " + carrier.ships[unit].hull
 alienFire.textContent = "Firepower: " + carrier.ships[unit].firepower
 // accuracy
 alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
+prompt()
 }
 
 // Allow retreat
+function prompt() {
+    statement.textContent = "You defeated the alien ship. The next ship is coming. Would you like to retreat?"
+    attackBtn.style.display = 'none'
+    let buttons = document.querySelectorAll('.extra-btn')
+    buttons.forEach( x => {
+        x.style.display = "inline"
+    })  
+}
+function retreat() {
+    statement.textContent = "You have fled."
+    let buttons = document.querySelectorAll('.extra-btn')
+    buttons.forEach( x => {
+        x.style.display = "none"
+    }) 
+}
+function stay() {
+    statement.textContent = "Ready to fire..."
+    humanLog.textContent = "..."
+    attackBtn.style.display = 'inline'
+    document.querySelector('#round').textContent = `Round ${round}`
+    document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
+    let buttons = document.querySelectorAll('.extra-btn')
+    buttons.forEach( x => {
+        x.style.display = "none"
+    })
+}

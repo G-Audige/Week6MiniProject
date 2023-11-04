@@ -12,23 +12,49 @@
         <h1>Space Fighters</h1>
     </div>
 
+    <div id="round">
+    </div>
+
     <div id="screen">
         <div class="fighters" id = "fighter-1">
             <h2>USS Assembly</h2>
         </div>
         <div class="fighters" id = "fighter-2">
-            <h2>Alien Ship</h2>
+            <h2 id = "ship-number">Alien Ship</h2>
         </div>
-    </div>
-    
-    <div id="controls">
-        <button id="attack" onclick = attack()>Attack</button>
-        <p id="focus">Ready to fire...</p>
     </div>
 
     <div id="info">
         <div id="human-stats" class="ships">
             USS Assembly Stats
+        </div>
+
+        <div id="controls">
+            <button id="attack" onclick = attack()>
+                Attack
+            </button>            
+            <p id="human-action">
+                ...
+            </p>
+            <p id="alien-action">
+                ...
+            </p>
+            <p id="focus">
+                Ready to fire...
+            </p>
+            <div id="extra-ctrl">
+                <div class = "extra-btn">
+                    <button id="retreat" onclick = retreat()>
+                        Retreat
+                    </button>
+                </div>
+            <div class = "extra-btn">
+                <button id="stay" onclick = stay()>
+                    Stay
+                </button>
+            </div>
+        </div>
+
         </div>
         <div id = "alien-stats" class="ships">
             Alien Ship Stats

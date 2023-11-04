@@ -13,25 +13,46 @@ div {
     width: 50%
 }
 .ships {
-    width: 50%
+    border: solid black;
+    margin: auto;
+    width: 25%
+}
+.extra-btn {
+    border: solid black;
+    display: none;
 }
 
 /* ids */
 #title {
     border: solid white;
 }
+#round {
+    border-bottom: solid black;
+    margin-top: 10px;
+}
 #screen {
     display: flex;
     height: 200px;
-    margin-top: 10px;
 }
 #controls {
-    margin-top: 10px;
+    border-bottom: solid black;
+    border-top: solid black;
+    padding: 0px 10px 0px 10px;
+    width: 50%;
 }
+#extra-ctrl {
+    border: solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
 #info {
     display: flex;
+    height: 180px;
+    justify-content: space-between;
     margin-top: 10px;
 }
 #full-bl {
     margin-top: 10px;
+    padding: 0px 10px 0px 10px
 }
