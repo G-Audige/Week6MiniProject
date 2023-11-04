@@ -26,8 +26,8 @@ let humanLog = document.querySelector('#human-action')
 let alienLog = document.querySelector('#alien-action')
 let attackBtn = document.querySelector('#attack')
 
-/////////////////////////
-// 1 Generate alien ships
+///////////////////////
+// Generate alien ships
 class AlienShip {
     constructor(hull, firepower, accuracy) {
         this.hull = hull
@@ -66,8 +66,8 @@ for(let i = 0; i < 6; i++) {
     carrier.generateShip(carrier.generateHull(3, 6), carrier.generateFirepower(2, 4), carrier.generateAccuracy(6, 8))
 }
 
-/////////////////////////////////////////////////////
-// 2. Show stats for human and 1 alien ship on screen
+
+//Show stats for human and 1 alien ship on screen
 class USShip {
     static hull = 20;
     static firepower = 5;
@@ -218,7 +218,7 @@ alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
 prompt()
 }
 
-// Allow retreat
+// Present retreat option
 function prompt() {
     statement.textContent = "You defeated the alien ship. The next ship is coming. Would you like to retreat?"
     attackBtn.style.display = 'none'

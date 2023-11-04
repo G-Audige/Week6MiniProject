@@ -2,7 +2,10 @@
 body {
     background-color: black;
     color: white;
+    margin: auto;
+    padding: 2% 0 2% 0;
     text-align: center;
+    width: 95%;
 }
 div {
     border: solid white;
@@ -10,6 +13,7 @@ div {
 
 /* classes */
 .fighters {
+    background-color: midnightblue;
     width: 50%
 }
 .ships {
@@ -37,7 +41,8 @@ div {
 #controls {
     border-bottom: solid black;
     border-top: solid black;
-    padding: 0px 10px 0px 10px;
+    height: 160px;
+    margin: auto;
     width: 50%;
 }
 #extra-ctrl {
@@ -45,11 +50,9 @@ div {
     display: flex;
     justify-content: space-between;
 }
-
 #info {
     display: flex;
-    height: 180px;
-    justify-content: space-between;
+    height: 190px;
     margin-top: 10px;
 }
 #full-bl {
