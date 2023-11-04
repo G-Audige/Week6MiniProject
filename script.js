@@ -104,11 +104,12 @@ class USShip {
     static accuracy = 0.7
 }
 
+// Show round in battlelog
+let reportRound = document.createElement('h3')
+reportRound.textContent = "Round " + (++round)
+battleLog.appendChild(reportRound)
+reportRound.style.textAlign = "Left"
 // Show USS Assembly Stats
-let report = document.createElement('h3')
-report.textContent = "Round " + (++round)
-battleLog.appendChild(report)
-report.style.textAlign = "Left"
 // hull
 const humanHull = document.createElement('p')
 humanHull.textContent = "Hull: " + USShip.hull
@@ -181,25 +182,25 @@ function counter() {
 function humanStrike(x) {
     let report = document.createElement('p')
     report.textContent = `You hit the alien ship for ${x} damage.`
-    humanLog.textContent = `You hit the alien ship for ${x} damage.`
+    humanLog.textContent = report.textContent
     battleLog.appendChild(report)
 }
 function alienStrike(x) {
     let report = document.createElement('p')
     report.textContent = `The alien ship hit your ship for ${x} damage.`
-    alienLog.textContent = `The alien ship hit your ship for ${x} damage.`
+    alienLog.textContent = report.textContent
     battleLog.appendChild(report)
 }
 function miss() {
     let report = document.createElement('p')
     report.textContent = "You missed."
-    humanLog.textContent = "You missed."
+    humanLog.textContent = report.textContent
     battleLog.appendChild(report)
 }
 function evade() {
     let report = document.createElement('p')
     report.textContent = "You evaded the attack of the alien ship."
-    alienLog.textContent = "You evaded the attack of the alien ship."
+    alienLog.textContent = report.textContent
     battleLog.appendChild(report)
 }
 function alienDestroyed() {
@@ -219,7 +220,7 @@ function alienDestroyed() {
 function win() {
     statement.textContent = "You defeated the last alien ship!"
     attackBtn.style.display = 'none'
-    retryBtn.innerHTML = "Play again?"
+    retryBtn.innerHTML = "Play again"
     retry.style.display = 'inline'
 }
 function lose() {
@@ -248,16 +249,16 @@ function prompt() {
     statement.textContent = "You defeated the alien ship. The next ship is coming. Would you like to retreat?"
     attackBtn.style.display = 'none'
     let buttons = document.querySelectorAll('.extra-btn')
-    buttons.forEach( x => {
-        x.style.display = "inline"
+    buttons.forEach( b => {
+        b.style.display = "inline"
     })  
 }
 function retreat() {
     humanLog.textContent = "..."
     statement.textContent = "You have fled."
     let buttons = document.querySelectorAll('.extra-btn')
-    buttons.forEach( x => {
-        x.style.display = "none"
+    buttons.forEach( b => {
+        b.style.display = "none"
     })
     retry.style.display = 'inline' 
 }
