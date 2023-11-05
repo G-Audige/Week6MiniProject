@@ -111,28 +111,28 @@ battleLog.appendChild(reportRound)
 reportRound.style.textAlign = "left"
 // Show USS Assembly Stats
 // hull
-const humanHull = document.createElement('p')
+let humanHull = document.createElement('p')
 humanHull.textContent = `Hull: ${USShip.hull}`
 humanstats.appendChild(humanHull)
 // firepower
-const humanFire = document.createElement('p')
+let humanFire = document.createElement('p')
 humanFire.textContent = `Firepower: ${USShip.firepower}`
 humanstats.appendChild(humanFire)
 // accuracy
-const humanAcc = document.createElement('p')
+let humanAcc = document.createElement('p')
 humanAcc.textContent = `Accuracy: ${USShip.accuracy}`
 humanstats.appendChild(humanAcc)
 // Show alien ship stats
 // hull
-const alienHull = document.createElement('p')
+let alienHull = document.createElement('p')
 alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
 alienStats.appendChild(alienHull)
 // firepower
-const alienFire = document.createElement('p')
+let alienFire = document.createElement('p')
 alienFire.textContent = `Firepower: ${carrier.ships[unit].firepower}`
 alienStats.appendChild(alienFire) 
 // accuracy
-const alienAcc = document.createElement('p')
+let alienAcc = document.createElement('p')
 alienAcc.textContent = `Accuracy: ${carrier.ships[unit].accuracy}`
 alienStats.appendChild(alienAcc)
 //Show round number
