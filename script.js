@@ -16,8 +16,8 @@ document.querySelector('title').textContent = "Space Fighters"
 
 // Declarations
 let unit = 0
-let turn = 0
-let round = 0
+let turn = 1
+let round = 1
 let shipNum = 6
 let humanstats = document.querySelector('#human-stats')
 let alienStats = document.querySelector('#alien-stats')
@@ -106,34 +106,34 @@ class USShip {
 
 // Show round in battlelog
 let reportRound = document.createElement('h3')
-reportRound.textContent = "Round " + (++round)
+reportRound.textContent = `Round ${round}`
 battleLog.appendChild(reportRound)
-reportRound.style.textAlign = "Left"
+reportRound.style.textAlign = "left"
 // Show USS Assembly Stats
 // hull
 const humanHull = document.createElement('p')
-humanHull.textContent = "Hull: " + USShip.hull
+humanHull.textContent = `Hull: ${USShip.hull}`
 humanstats.appendChild(humanHull)
 // firepower
 const humanFire = document.createElement('p')
-humanFire.textContent = "Firepower: " + USShip.firepower
+humanFire.textContent = `Firepower: ${USShip.firepower}`
 humanstats.appendChild(humanFire)
 // accuracy
 const humanAcc = document.createElement('p')
-humanAcc.textContent = "Accuracy: " + USShip.accuracy
+humanAcc.textContent = `Accuracy: ${USShip.accuracy}`
 humanstats.appendChild(humanAcc)
 // Show alien ship stats
 // hull
 const alienHull = document.createElement('p')
-alienHull.textContent = "Hull: " + carrier.ships[unit].hull
+alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
 alienStats.appendChild(alienHull)
 // firepower
 const alienFire = document.createElement('p')
-alienFire.textContent = "Firepower: " + carrier.ships[unit].firepower
+alienFire.textContent = `Firepower: ${carrier.ships[unit].firepower}`
 alienStats.appendChild(alienFire) 
 // accuracy
 const alienAcc = document.createElement('p')
-alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
+alienAcc.textContent = `Accuracy: ${carrier.ships[unit].accuracy}`
 alienStats.appendChild(alienAcc)
 //Show round number
 document.querySelector('#round').textContent = `Round ${round}`
@@ -146,11 +146,11 @@ switchAlienModel(shipModels)
 // Human attack
 function attack() {
     const report = document.createElement('h3')
-    report.textContent = "Turn: " + (++turn)
+    report.textContent = `Turn: ${turn++}`
     battleLog.appendChild(report)
     if(Math.random() <= USShip.accuracy) {
         carrier.ships[unit].hull -= USShip.firepower
-        alienHull.textContent = "Hull: " + carrier.ships[unit].hull
+        alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
         humanStrike(USShip.firepower)
     }
     else {
@@ -168,7 +168,7 @@ function attack() {
 function counter() {
     if(Math.random() < carrier.ships[unit].accuracy) {
         USShip.hull -= carrier.ships[unit].firepower
-        humanHull.textContent = "Hull: " + USShip.hull
+        humanHull.textContent = `Hull: ${USShip.hull}`
         alienStrike(carrier.ships[unit].firepower)
         if(USShip.hull <= 0) {
             lose()
@@ -225,7 +225,7 @@ function win() {
 }
 function lose() {
     removeShip(humanImg)
-    statement.textContent = "You have lost this battle."
+    statement.textContent = "Your ship has been destroyed."
     attackBtn.style.display = 'none'
     retry.style.display = 'inline'
 }
@@ -237,11 +237,11 @@ document.querySelector('#round').textContent = "..."
 document.querySelector('#ship-number').textContent = "..."
 // Show new alien ship stats
 // hull
-alienHull.textContent = "Hull: " + carrier.ships[unit].hull
+alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
 // firepower
-alienFire.textContent = "Firepower: " + carrier.ships[unit].firepower
+alienFire.textContent = `Firepower: ${carrier.ships[unit].firepower}`
 // accuracy
-alienAcc.textContent = "Accuracy: " + carrier.ships[unit].accuracy
+alienAcc.textContent = `Accuracy: ${carrier.ships[unit].accuracy}`
 }
 
 // Present retreat/stay option
@@ -264,9 +264,9 @@ function retreat() {
 }
 function stay() {
     let reportRound = document.createElement('h3')
-    reportRound.textContent = "Round " + (++round)
+    reportRound.textContent = `Round ${++round}`
     battleLog.appendChild(reportRound)
-    reportRound.style.textAlign = "Left"
+    reportRound.style.textAlign = "left"
     statement.textContent = "Ready to fire..."
     humanLog.textContent = "..."
     attackBtn.style.display = 'inline'
