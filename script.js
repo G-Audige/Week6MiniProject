@@ -14,7 +14,9 @@ document.querySelector('title').textContent = "Space Fighters"
     a. (complete) Create win state if player wins
 */
 
+///////////////
 // Declarations
+///////////////
 let unit = 0
 let turn = 1
 let round = 1
@@ -100,16 +102,15 @@ class USShip {
     static accuracy = 0.7
 }
 
+
+//////////////
+// Set up page
+//////////////
 // Generate alien ships
 const carrier = new Mothership()
 for(let i = 0; i < shipNum; i++) {
     carrier.generateShip(carrier.generateHull(3, 6), carrier.generateFirepower(2, 4), carrier.generateAccuracy(6, 8))
 }
-
-
-//////////////
-// Set up page
-//////////////
 // Show round in battlelog
 let reportRound = document.createElement('h3')
 reportRound.textContent = `Round ${round}`
