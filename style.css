@@ -26,40 +26,37 @@ h2 {
     padding: 5px;
 }
 .ships {
-    border: solid black;
+    border: none;
     margin: auto;
     width: 25%
 }
 .extra-btn {
-    border: solid black;
+    border: none;
     display: none;
 }
 
 /* ids */
-#title {
-    border: outset white;
-}
 #round {
-    border-style: outset white;
     margin-top: 10px;
 }
 #screen {
     display: flex;
 }
 #controls {
-    border-bottom: solid black;
-    border-top: solid black;
+    border-bottom: none;
+    border-top: none;
     height: 160px;
     margin: auto;
+    padding: 5px;
     width: 50%;
 }
 #extra-ctrl {
-    border: solid black;
+    border: none;
     display: flex;
     justify-content: space-between;
 }
 #retry {
-    border: solid black;
+    border: none;
     display: none;
     margin: auto;
 }
