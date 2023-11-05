@@ -56,9 +56,10 @@ let shipModels = [
     "https://mir-s3-cdn-cf.behance.net/project_modules/disp/633cea133022173.61b4a4ca1edc7.gif"
 ]
 
-
-///////////////////////
-// Generate alien ships
+//////////
+// Classes
+//////////
+// Alien Class
 class AlienShip {
     constructor(hull, firepower, accuracy) {
         this.hull = hull
@@ -66,6 +67,7 @@ class AlienShip {
         this.accuracy = accuracy
     }
 }
+// Alien factory class
 class Mothership {
     constructor() {
         this.ships = []
@@ -90,16 +92,18 @@ class Mothership {
         return (Math.floor(Math.random() * (max - min + 1)) + min) / 10;
     }
 }
-const carrier = new Mothership()
-for(let i = 0; i < shipNum; i++) {
-    carrier.generateShip(carrier.generateHull(3, 6), carrier.generateFirepower(2, 4), carrier.generateAccuracy(6, 8))
-}
 
 // USS class
 class USShip {
     static hull = 20;
     static firepower = 5;
     static accuracy = 0.7
+}
+
+// Generate alien ships
+const carrier = new Mothership()
+for(let i = 0; i < shipNum; i++) {
+    carrier.generateShip(carrier.generateHull(3, 6), carrier.generateFirepower(2, 4), carrier.generateAccuracy(6, 8))
 }
 
 
@@ -156,7 +160,7 @@ function attack() {
     if(Math.random() <= USShip.accuracy) {
         carrier.ships[unit].hull -= USShip.firepower
         alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
-        humanStrike(USShip.firepower)
+        reportHumanAction(USShip.firepower)
     }
     else {
         miss()
@@ -166,7 +170,7 @@ function attack() {
         counter()
     }
     else {
-        alienDestroyed()
+        destroyAlien()
     }
 }
 // Alien counterattack
@@ -174,7 +178,7 @@ function counter() {
     if(Math.random() < carrier.ships[unit].accuracy) {
         USShip.hull -= carrier.ships[unit].firepower
         humanHull.textContent = `Hull: ${USShip.hull}`
-        alienStrike(carrier.ships[unit].firepower)
+        reportAlienAction(carrier.ships[unit].firepower)
         if(USShip.hull <= 0) {
             lose()
         }
@@ -183,14 +187,15 @@ function counter() {
         evade()
     }
 }
+
 // Display report of battle
-function humanStrike(x) {
+function reportHumanAction(x) {
     let report = document.createElement('p')
     report.textContent = `You hit the alien ship for ${x} damage.`
     humanLog.textContent = report.textContent
     battleLog.appendChild(report)
 }
-function alienStrike(x) {
+function reportAlienAction(x) {
     let report = document.createElement('p')
     report.textContent = `The alien ship hit your ship for ${x} damage.`
     alienLog.textContent = report.textContent
@@ -208,7 +213,7 @@ function evade() {
     alienLog.textContent = report.textContent
     battleLog.appendChild(report)
 }
-function alienDestroyed() {
+function destroyAlien() {
     removeShip(alienImg)
     let report = document.createElement('p')
     report.textContent = "You defeated the alien ship."
