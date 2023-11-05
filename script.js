@@ -56,6 +56,7 @@ let shipModels = [
     "https://mir-s3-cdn-cf.behance.net/project_modules/disp/633cea133022173.61b4a4ca1edc7.gif"
 ]
 
+
 ///////////////////////
 // Generate alien ships
 class AlienShip {
@@ -65,7 +66,6 @@ class AlienShip {
         this.accuracy = accuracy
     }
 }
-
 class Mothership {
     constructor() {
         this.ships = []
@@ -90,20 +90,22 @@ class Mothership {
         return (Math.floor(Math.random() * (max - min + 1)) + min) / 10;
     }
 }
-
 const carrier = new Mothership()
 for(let i = 0; i < shipNum; i++) {
     carrier.generateShip(carrier.generateHull(3, 6), carrier.generateFirepower(2, 4), carrier.generateAccuracy(6, 8))
 }
 
-
-//Show stats for human and 1 alien ship on screen
+// USS class
 class USShip {
     static hull = 20;
     static firepower = 5;
     static accuracy = 0.7
 }
 
+
+//////////////
+// Set up page
+//////////////
 // Show round in battlelog
 let reportRound = document.createElement('h3')
 reportRound.textContent = `Round ${round}`
@@ -142,6 +144,9 @@ document.querySelector('#ship-number').textContent = `Alien Ship ${round}`
 switchAlienModel(shipModels)
 
 
+/////////////////////////
+// Functions to be called
+/////////////////////////
 // Simulate fight
 // Human attack
 function attack() {
@@ -279,7 +284,7 @@ function stay() {
     })
 }
 
-// Handle images
+// Switch images
 function switchAlienModel(ships) {
     alienImg.setAttribute('src', ships[Math.floor(Math.random() * ships.length)])
 }
