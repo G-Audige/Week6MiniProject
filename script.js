@@ -6,10 +6,10 @@ document.querySelector('title').textContent = "Space Fighters"
 3. (Complete) Simulate fight
     a. (Complete) Display report of battle
     b. (Complete) Create lose state if player is defeated
-4. (complete) Allow player to continue fight once current alien ship is destroyed
+4. (Complete) Present player the option to retreat or continue once current alien ship is destroyed
     a. (Complete) Create prompt with options
     b. (Complete) Create retreat state if player retreats
-5. (complete) Create new round and move in new alien ship
+5. (Complete) Create new round and move in new alien ship
 6. (Complete) Continue until last alien ship is destroyed
     a. (complete) Create win state if player wins
 */
@@ -21,6 +21,7 @@ let unit = 0
 let turn = 1
 let round = 1
 let shipNum = 6
+const downedAt = 0
 let humanstats = document.querySelector('#human-stats')
 let alienStats = document.querySelector('#alien-stats')
 let battleLog = document.querySelector('#full-bl')
@@ -94,7 +95,6 @@ class Mothership {
         return (Math.floor(Math.random() * (max - min + 1)) + min) / 10;
     }
 }
-
 // USS class
 class USShip {
     static hull = 20;
@@ -117,28 +117,28 @@ reportRound.textContent = `Round ${round}`
 battleLog.appendChild(reportRound)
 reportRound.style.textAlign = "left"
 // Show USS Assembly Stats
-// hull
+    // hull
 let humanHull = document.createElement('p')
 humanHull.textContent = `Hull: ${USShip.hull}`
 humanstats.appendChild(humanHull)
-// firepower
+    // firepower
 let humanFire = document.createElement('p')
 humanFire.textContent = `Firepower: ${USShip.firepower}`
 humanstats.appendChild(humanFire)
-// accuracy
+    // accuracy
 let humanAcc = document.createElement('p')
 humanAcc.textContent = `Accuracy: ${USShip.accuracy}`
 humanstats.appendChild(humanAcc)
 // Show alien ship stats
-// hull
+    // hull
 let alienHull = document.createElement('p')
 alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
 alienStats.appendChild(alienHull)
-// firepower
+    // firepower
 let alienFire = document.createElement('p')
 alienFire.textContent = `Firepower: ${carrier.ships[unit].firepower}`
 alienStats.appendChild(alienFire) 
-// accuracy
+    // accuracy
 let alienAcc = document.createElement('p')
 alienAcc.textContent = `Accuracy: ${carrier.ships[unit].accuracy}`
 alienStats.appendChild(alienAcc)
@@ -153,7 +153,7 @@ switchAlienModel(shipModels)
 // Functions to be called
 /////////////////////////
 // Simulate fight
-// Human attack
+    // Human attack
 function attack() {
     const report = document.createElement('h3')
     report.textContent = `Turn: ${turn++}`
@@ -166,21 +166,20 @@ function attack() {
     else {
         miss()
     }
-
-    if(carrier.ships[unit].hull > 0) {
+    if(carrier.ships[unit].hull > downedAt) {
         counter()
     }
     else {
         destroyAlien()
     }
 }
-// Alien counterattack
+    // Alien counterattack
 function counter() {
     if(Math.random() < carrier.ships[unit].accuracy) {
         USShip.hull -= carrier.ships[unit].firepower
         humanHull.textContent = `Hull: ${USShip.hull}`
         reportAlienAction(carrier.ships[unit].firepower)
-        if(USShip.hull <= 0) {
+        if(USShip.hull <= downedAt) {
             lose()
         }
     }
@@ -188,7 +187,6 @@ function counter() {
         evade()
     }
 }
-
 // Display report of battle
 function reportHumanAction(x) {
     let report = document.createElement('p')
@@ -240,21 +238,19 @@ function lose() {
     attackBtn.style.display = 'none'
     retry.style.display = 'inline'
 }
-
-// Start new round
+// Update to show new round info
 function startNewRound() {
 prompt()
 document.querySelector('#round').textContent = "..."
 document.querySelector('#ship-number').textContent = "..."
 // Show new alien ship stats
-// hull
+    // hull
 alienHull.textContent = `Hull: ${carrier.ships[unit].hull}`
-// firepower
+    // firepower
 alienFire.textContent = `Firepower: ${carrier.ships[unit].firepower}`
-// accuracy
+    // accuracy
 alienAcc.textContent = `Accuracy: ${carrier.ships[unit].accuracy}`
 }
-
 // Present retreat/stay option
 function prompt() {
     statement.textContent = "You defeated the alien ship. The next ship is coming. Would you like to retreat?"
@@ -289,7 +285,6 @@ function stay() {
         x.style.display = "none"
     })
 }
-
 // Switch images
 function switchAlienModel(ships) {
     alienImg.setAttribute('src', ships[Math.floor(Math.random() * ships.length)])
