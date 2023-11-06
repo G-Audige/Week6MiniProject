@@ -6,10 +6,10 @@ document.querySelector('title').textContent = "Space Fighters"
 3. (Complete) Simulate fight
     a. (Complete) Display report of battle
     b. (Complete) Create lose state if player is defeated
-4. (Complete) Present player the option to retreat or continue once current alien ship is destroyed
+4. (Complete) Create new round and move in new alien ship
+5. (Complete) Present player the option to retreat or continue once current alien ship is destroyed
     a. (Complete) Create prompt with options
     b. (Complete) Create retreat state if player retreats
-5. (Complete) Create new round and move in new alien ship
 6. (Complete) Continue until last alien ship is destroyed
     a. (complete) Create win state if player wins
 */
@@ -175,7 +175,7 @@ function attack() {
 }
     // Alien counterattack
 function counter() {
-    if(Math.random() < carrier.ships[unit].accuracy) {
+    if(Math.random() <= carrier.ships[unit].accuracy) {
         USShip.hull -= carrier.ships[unit].firepower
         humanHull.textContent = `Hull: ${USShip.hull}`
         reportAlienAction(carrier.ships[unit].firepower)
@@ -257,7 +257,7 @@ function prompt() {
     attackBtn.style.display = 'none'
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( b => {
-        b.style.display = "inline"
+        b.style.display = 'inline'
     })  
 }
 function retreat() {
@@ -265,7 +265,7 @@ function retreat() {
     statement.textContent = "You have fled."
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( b => {
-        b.style.display = "none"
+        b.style.display = 'none'
     })
     retry.style.display = 'inline' 
 }
@@ -273,7 +273,7 @@ function stay() {
     let reportRound = document.createElement('h3')
     reportRound.textContent = `Round ${++round}`
     battleLog.appendChild(reportRound)
-    reportRound.style.textAlign = "left"
+    reportRound.style.textAlign = 'left'
     statement.textContent = "Ready to fire..."
     humanLog.textContent = "..."
     attackBtn.style.display = 'inline'
@@ -282,7 +282,7 @@ function stay() {
     switchAlienModel(shipModels)
     let buttons = document.querySelectorAll('.extra-btn')
     buttons.forEach( x => {
-        x.style.display = "none"
+        x.style.display = 'none'
     })
 }
 // Switch images
